@@ -1,0 +1,8 @@
+---
+- hosts: mamachine
+  sudo: true
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+    - name: install Tomcat
+      apt: name=tomcat7 state=present
