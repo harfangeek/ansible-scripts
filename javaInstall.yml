@@ -1,0 +1,8 @@
+---
+- hosts: mamachine
+  sudo: true
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+    - name: install Java
+      apt: name=openjdk-7-jdk state=present
