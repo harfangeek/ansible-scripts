@@ -1,0 +1,24 @@
+---
+- name: Install jenkins
+  hosts: mysql
+  user: user
+  sudo: True
+
+  tasks:
+    - name: Add repository key
+      apt_key: 
+        url='http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key'
+        state=present
+    - name: Add repository
+      apt_repository: 
+        repo='deb http://pkg.jenkins-ci.org/debian binary/'
+        update_cache=yes
+    - name: Install dependencies
+      apt: 
+        name={{item}}
+        state=present
+        update_cache=yes
+        cache_valid_time=60
+        install_recommends=no
+      with_items:
+        - jenkins
