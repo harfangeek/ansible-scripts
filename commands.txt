@@ -1,0 +1,3 @@
+ansible all -m ping
+ansible all -i hosts --list-hosts
+ansible all -i hosts -m ping
