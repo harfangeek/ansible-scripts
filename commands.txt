@@ -2,6 +2,7 @@ Install VM + ansible:
 wget https://releases.hashicorp.com/vagrant/1.7.2/vagrant_1.7.2_x86_64.deb
 dpkg -i vagrant_1.7.2_x86_64.deb
 apt-get install ansible virtualbox virtualbox-dkms
+vagrant init box-name https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
 vagrant up
 virtualbox &
 
