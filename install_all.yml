@@ -1,0 +1,8 @@
+---
+- hosts: all
+  vars:
+#    http_proxy: "http//147.215.1.189:3128"
+    http_proxy: ""
+  sudo: true
+  tasks:
+  - include: apt.yml http_proxy={{ http_proxy }}

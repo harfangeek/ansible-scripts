@@ -1,0 +1,10 @@
+---
+- hosts: all
+  sudo: true
+  tasks:
+    - name: install Java
+      apt: name=openjdk-7-jdk state=present
+    - name: Set Java path
+      copy:
+        content: "export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/"
+	dest: "~/.bashrc"

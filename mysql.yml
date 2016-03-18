@@ -1,6 +1,6 @@
 ---
 - name: Install MySQL for production ready server
-  hosts: mysql
+  hosts: all
   user: user
   sudo: True
   vars:
