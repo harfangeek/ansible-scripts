@@ -1,8 +1,0 @@
----
-- hosts: all
-  sudo: true
-  tasks:
-    - name: update apt cache
-      apt: update_cache=yes
-    - name: install Apache2
-      apt: name=apache2 state=present

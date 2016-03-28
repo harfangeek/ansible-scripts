@@ -1,7 +1,29 @@
 ---
-- hosts: all
-  sudo: yes
-  tasks:
-    - name: install apache2
-      apt: name=apache2 state=latest
+- name: install apache2
+  apt: name={{item}} state=latest
+  with_items:
+    - apache2
+    - libapache2-mod-proxy-html
+#- name: Change apache server port
+#  lineinfile: dest=/etc/apache2/ports.conf
+#              regexp="Listen 80"
+#              line="Listen 8080"
+- name: Manage Apache2 modules
+  apache2_module: state=present name={{item}}
+  with_items:
+    - proxy 
+    - proxy_http
+    - proxy_ajp 
+    - rewrite 
+    - deflate
+    - headers 
+    - proxy_balancer
+    - proxy_connect
+    - proxy_html
+- name: Create tomcat vhost
+  template: src=vhosts/tomcat.conf dest=/etc/apache2/sites-available/tomcat.conf
+- name: Enable tomcat vhost
+  command: a2ensite tomcat
+- name: Restart Apache2
+  service: name=apache2 state=restarted
 

@@ -11,3 +11,4 @@ Ansible tester les hosts:
 ansible all -m ping
 ansible all -i hosts --list-hosts
 ansible all -i hosts -m ping
+ansible-playbook install_all.yml -i hosts -k

@@ -1,8 +1,14 @@
 ---
-- hosts: mamachine
-  sudo: true
-  tasks:
-    - name: update apt cache
-      apt: update_cache=yes
-    - name: install Tomcat
-      apt: name=tomcat7 state=present
+- name: install Tomcat
+  apt: name={{item}} state=installed
+  with_items:
+    - tomcat7
+    - tomcat7-admin
+- name: Change Tomcat server port
+  lineinfile: dest=/etc/tomcat7/server.xml 
+              regexp="<Connector port=\"8080\" protocol=\"HTTP/1.1\""
+              line="<Connector port=\"9020\" protocol=\"HTTP/1.1\""
+- name: Restart tomcat
+  service: name=tomcat7 state=restarted
+- name: Deploy J2EE app
+  command: mv /root/webapp/tasks-server-1.0-SNAPSHOT.war /var/lib/tomcat7/webapps/tasks.war
