@@ -5,11 +5,12 @@
     http_proxy: ""
   sudo: true
   tasks:
-  - include: apt.yml http_proxy={{ http_proxy }}
-  - include: git.yml
-  - include: java.yml
-  - include: apache.yml
-  - include: mysql.yml MySQL_root_pass="root"
-  - include: tomcat.yml
+#  - include: apt.yml http_proxy={{ http_proxy }}
+#  - include: git.yml
+#  - include: java.yml
+#  - include: apache.yml
+#  - include: mysql.yml MySQL_root_pass="root"
+#  - include: tomcat.yml
+#  - include: maven.yml
   - include: jenkins.yml
 

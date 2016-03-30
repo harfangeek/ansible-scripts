@@ -8,7 +8,11 @@
   lineinfile: dest=/etc/tomcat7/server.xml 
               regexp="<Connector port=\"8080\" protocol=\"HTTP/1.1\""
               line="<Connector port=\"9020\" protocol=\"HTTP/1.1\""
+- name: Change Tomcat server port
+  lineinfile: dest=/etc/tomcat7/tomcat-users.xml
+              regexp="<tomcat-users>"
+              line="<tomcat-users>\n\t<user username=\"deployer\" password=\"deployer\" roles=\"manager-script\" />"
 - name: Restart tomcat
   service: name=tomcat7 state=restarted
-- name: Deploy J2EE app
-  command: mv /root/webapp/tasks-server-1.0-SNAPSHOT.war /var/lib/tomcat7/webapps/tasks.war
+#- name: Deploy J2EE app
+#  command: mv /root/webapp/tasks-server-1.0-SNAPSHOT.war /var/lib/tomcat7/webapps/tasks.war
