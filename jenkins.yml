@@ -1,31 +1,31 @@
----
+---  
+- name: Add jenkins repository key
+  apt_key: 
+    url='http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key'
+    state=present
+- name: Add jenkins repository
+  apt_repository: 
+    repo='deb http://pkg.jenkins-ci.org/debian binary/'
+    update_cache=yes
 - name: Install jenkins
-  hosts: all
-  user: user
-  sudo: True
-
-  tasks:
-  
-    - name: Add repository key
-      apt_key: 
-        url='http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key'
-        state=present
-      environment:
-        http_proxy: http://147.215.1.189:3128
-    - name: Add repository
-      apt_repository: 
-        repo='deb http://pkg.jenkins-ci.org/debian binary/'
-        update_cache=yes
-      environment:
-        http_proxy: http://147.215.1.189:3128
-    - name: Install dependencies
-      apt: 
-        name={{item}}
-        state=present
-        update_cache=yes
-        cache_valid_time=60
-        install_recommends=no
-      environment:
-        http_proxy: http://147.215.1.189:3128
-      with_items:
-        - jenkins
+  apt: 
+    name=jenkins
+    state=present
+- name: Change jenkins server name
+  lineinfile: dest=/etc/default/jenkins
+              regexp="NAME="
+              line="NAME=jenkins"
+#- name: Change jenkins url prefix
+#  lineinfile: dest=/etc/default/jenkins
+#              regexp="PREFIX="
+#              line="PREFIX=/$NAME"
+- name: Change jenkins server port
+  lineinfile: dest=/etc/default/jenkins
+              regexp="HTTP_PORT="
+              line="HTTP_PORT=9010"
+- name: Change jenkins server arguments
+  lineinfile: dest=/etc/default/jenkins
+              regexp="JENKINS_ARGS="
+              line="JENKINS_ARGS=\"--webroot=/var/cache/$NAME/war --httpPort=$HTTP_PORT --ajp13Port=$AJP_PORT --prefix=$PREFIX\""
+- name: Restart jenkins
+  service: name=jenkins state=restarted

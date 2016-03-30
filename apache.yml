@@ -20,10 +20,10 @@
     - proxy_balancer
     - proxy_connect
     - proxy_html
-- name: Create tomcat vhost
-  template: src=vhosts/tomcat.conf dest=/etc/apache2/sites-available/tomcat.conf
-- name: Enable tomcat vhost
-  command: a2ensite tomcat
+- name: Create tomcat and jenkins vhosts
+  template: src=reverse_proxy.conf dest=/etc/apache2/sites-available/reverse_proxy.conf
+- name: Enable tomcat and jenkins vhosts
+  command: a2ensite reverse_proxy
 - name: Restart Apache2
   service: name=apache2 state=restarted
 

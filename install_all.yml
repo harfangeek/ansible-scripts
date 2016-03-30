@@ -11,4 +11,5 @@
   - include: apache.yml
   - include: mysql.yml MySQL_root_pass="root"
   - include: tomcat.yml
+  - include: jenkins.yml
 
