@@ -9,6 +9,13 @@
 - Lancer la VM:
   - git clone https://github.com/harfangeek/ansible-scripts.git
   - vagrant up : Télécharge et installe la VM, execute le playbook ansible lors de la première mise en route
+  - Services accessibles depuis le host:
+    - Jenkins : http://localhost:8080/jenkins
+      - Build configuré: récupère l'application sur github, compile et déploie sur tomcat
+    - Tomcat : http://localhost:8080/tomcat
+    - Application : http://localhost:8080/tomcat/tasks-server
+
+- Gestion de la VM:
   - vagrant provision : executer le scritp ansible une nouvelle fois
   - vagrant ssh : ouvre une session ssh sur la VM
   - vagrant halt : arrête la VM
