@@ -16,7 +16,7 @@
     - Application : http://localhost:8080/tomcat/tasks-server
 
 - Gestion de la VM:
-  - vagrant provision : executer le scritp ansible une nouvelle fois
+  - vagrant provision : executer le script ansible une nouvelle fois
   - vagrant ssh : ouvre une session ssh sur la VM
   - vagrant halt : arrête la VM
   - vagrant reload : reboot la VM
