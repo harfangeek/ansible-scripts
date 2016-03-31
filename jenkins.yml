@@ -45,7 +45,7 @@
   command: tar zxvf /root/tasks.tar.gz -C /var/lib/jenkins/jobs/
 - name: Set jenkins job owner
   command: chown -R jenkins:jenkins /var/lib/jenkins/jobs/tasks
-- tasks/name: Install Jenkins plugins
+- name: Install Jenkins plugins
   command: java -jar /root/jenkins-cli.jar -s http://localhost:9010/jenkins install-plugin {{item}}
   with_items:
     - git
@@ -61,14 +61,6 @@
     - clover
     - deploy
 - name: Configure Maven in Jenkins
-  lineinfile: dest=/var/lib/jenkins/hudson.tasks.Maven.xml
-              regexp="<installations/>"
-              line="<installations>
-                      <hudson.tasks.Maven_-MavenInstallation>
-                        <name>default</name>
-                        <home>/usr/share/maven</home>
-                        <properties/>
-                      </hudson.tasks.Maven_-MavenInstallation>
-                    </installations>"
+  template: src=jenkins_maven.xml dest=/var/lib/jenkins/hudson.tasks.Maven.xml
 - name: Restart jenkins
   service: name=jenkins state=restarted
