@@ -23,5 +23,3 @@
   mysql_db: db=test state=absent login_password="{{ MySQL_root_pass }}" login_user=root
 - name: Create webapp database
   mysql_db: name=tasks state=present login_password="{{ MySQL_root_pass }}" login_user=root
-#- name: Import webapp tables
-#  mysql_db: name=tasks state=import target=~/webapp/db.sql login_password="{{ MySQL_root_pass }}" login_user=root

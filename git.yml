@@ -1,6 +1,3 @@
 ---
 - name: Install git
   apt: name=git state=present
-#- name: Clone J2EE application
-#  git: repo=https://github.com/harfangeek/tasks-java-ee.git
-#       dest=~/webapp/ update=yes
