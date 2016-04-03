@@ -1,6 +1,0 @@
----
-- hosts: all
-  sudo: true
-  tasks:
-    - name: Demarrer Tomcat
-      service: name=tomcat7 state=started enabled=yes

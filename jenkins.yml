@@ -15,10 +15,6 @@
   lineinfile: dest=/etc/default/jenkins
               regexp="NAME="
               line="NAME=jenkins"
-#- name: Change jenkins url prefix
-#  lineinfile: dest=/etc/default/jenkins
-#              regexp="PREFIX="
-#              line="PREFIX=/$NAME"
 - name: Change jenkins server port
   lineinfile: dest=/etc/default/jenkins
               regexp="HTTP_PORT="
