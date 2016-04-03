@@ -8,6 +8,7 @@
 
 - Lancer la VM:
   - git clone https://github.com/harfangeek/ansible-scripts.git
+  - cd ansible-scripts
   - vagrant up : Télécharge et installe la VM, execute le playbook ansible lors de la première mise en route
   - Services accessibles depuis le host:
     - Jenkins : http://localhost:8080/jenkins
