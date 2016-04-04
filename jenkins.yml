@@ -22,7 +22,8 @@
 - name: Change jenkins server arguments
   lineinfile: dest=/etc/default/jenkins
               regexp="JENKINS_ARGS="
-              line="JENKINS_ARGS=\"--webroot=/var/cache/$NAME/war --httpPort=$HTTP_PORT --ajp13Port=$AJP_PORT --prefix=$PREFIX\""
+              line="JENKINS_ARGS=\"--webroot=/var/cache/$NAME/war 
+              --httpPort=$HTTP_PORT --ajp13Port=$AJP_PORT --prefix=$PREFIX\""
 - name: Restart jenkins
   service: name=jenkins state=restarted
 - name: Wait until Jenkins is available
@@ -31,16 +32,25 @@
   until: result.stdout.find("200 OK") != -1
   retries: 12
   delay: 5
+- name: Copy jenkins job
+  copy: src={{item}}.tar.gz dest=/root/
+  with_items:
+    - tasks-client
+    - tasks-server
+- name: Extract jenkins job
+  command: tar zxvf /root/{{item}}.tar.gz -C /var/lib/jenkins/jobs/
+  with_items:
+    - tasks-client
+    - tasks-server
+- name: Set jenkins job owner
+  command: chown -R jenkins:jenkins /var/lib/jenkins/jobs/{{item}}
+  with_items:
+    - tasks-client
+    - tasks-server
 - name: Get jenkins-cli.jar
   get_url: 
     url=http://localhost:9010/jenkins/jnlpJars/jenkins-cli.jar
     dest=/root/
-- name: Copy jenkins job
-  copy: src=tasks.tar.gz dest=/root/
-- name: Extract jenkins job
-  command: tar zxvf /root/tasks.tar.gz -C /var/lib/jenkins/jobs/
-- name: Set jenkins job owner
-  command: chown -R jenkins:jenkins /var/lib/jenkins/jobs/tasks
 - name: Install Jenkins plugins
   command: java -jar /root/jenkins-cli.jar -s http://localhost:9010/jenkins install-plugin {{item}}
   with_items:
