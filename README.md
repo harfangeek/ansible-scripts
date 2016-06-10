@@ -1,6 +1,9 @@
 # ansible-scripts
 [ESIEE][Usine Logicielle] Scripts Ansible
 
+Ce projet a pour but l'installation automatisée d'une usinge logicielle Java à l'aide des technologies Vagrant et Ansible. L'usine logicielle se composent de plusieurs outils d'aide au développement logiciel (compilation, dépendances, déploiement, etc), d'une infrastructure web (serveur Tomact, reverse proxy Apache) et d'une [application J2EE](https://github.com/harfangeek/api-tasks-java-ee).
+Pour plus d'information voir la [documentation](https://github.com/harfangeek/ansible-scripts/blob/master/documentation.pdf).
+
 - Installation de Vagrant + Ansible:
   - wget https://releases.hashicorp.com/vagrant/1.7.2/vagrant_1.7.2_x86_64.deb
   - dpkg -i vagrant_1.7.2_x86_64.deb
